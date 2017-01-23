@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Vue</title>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+</head>
+<body>
+  <div class="well" style="margin-top:20vh">
+    <!-- let's create a text input first -->
+    <div id="app">
+      <div class="form-group">
+      <input type="text" v-model="custom" class="form-control"/>
+
+      <input type="text" :value="customTwo" @input="customTwo = $event.target.value" class="form-control"/>
+
+      <custom-input v-model="componentOne" class="form-control"></cutsom-input>
+
+      </div>
+    <h2>The string are saying:</h2>
+    <p><span>{{custom}}</span> <span>{{customTwo}}</span> <span>{{componentOne}}</span>
+    </div>
+
+
+  </div>
+
+  <script>
+
+  Vue.component('custom-input', {
+    //I can call this whatever.
+    // This is the data that is passed from the v-model="(name of the data I want to pass down)"
+    // As long as the prop name is the same as the :value binded in the template
+    // eg => props: ['code'] :value="code"
+    //    => props: ['value'] :value="value"
+    props: ['code'],
+
+    template: `
+      <input type="text" :value="code" @input="updateCode($event.target.value)" />
+    `,
+
+    methods: {
+      updateCode(code) {
+        this.$emit('input', code);
+      }
+    }
+  })
+
+
+
+  new Vue ({
+    el: '#app',
+
+    data: {
+      custom: 'compose us',
+      customTwo: 'change us',
+      componentOne: 'we are dynamic',
+    }
+  })
+
+
+  </script>
+
+</body>
+</html>

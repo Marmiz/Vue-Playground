@@ -13,6 +13,11 @@ a personal study collection of small components made with [Vue.js](https://vuejs
 
 ---
 
+### Custom Input
+
+>A study on updating input based on user feedback on child components
+
+---
 
 
 #### Made with vue-simple-boilerplate
