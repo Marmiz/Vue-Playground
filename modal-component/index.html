@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Vue</title>
+  <!-- Latest compiled and minified CSS -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css" />
+</head>
+<body>
+
+<section class="section">
+  <div id="root" class="container">
+
+    <!-- create custom event @close to register the click in the modal button and change the visibility -->
+    <modal v-if="showModel" @close="showModel = false">
+      <p>This text has been inserted via <tt>&lt;section&gt;</tt></p>
+    </modal>
+
+    <a class="button is-primary is-outlined" @click="showModel = true">Show Modal</a>
+
+  </div>
+</section>
+
+  <script>
+
+  Vue.component('modal', {
+    // in the template the button emit the event "close"
+    // that will be registered from the parent and execute the function there
+    template: `
+    <div class="modal is-active">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="box">
+          <slot></slot>
+      </div>
+      </div>
+      <button class="modal-close" @click="$emit('close')"></button>
+    </div>
+    `
+  })
+  new Vue({
+    el: '#root',
+
+    data: {
+      showModel: false
+    }
+  })
+
+  </script>
+</body>
+</html>

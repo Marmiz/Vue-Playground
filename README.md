@@ -3,7 +3,7 @@ Vue Playground
 
 a personal study collection of small components made with [Vue.js](https://vuejs.org/) :heart:
 
-[Bootstrap Css](http://getbootstrap.com/css/) has been added for quick styling.
+[Bootstrap Css](http://getbootstrap.com/css/) or [Bulma](http://bulma.io/) have been added for quick styling.
 
 ---
 
@@ -18,6 +18,13 @@ a personal study collection of small components made with [Vue.js](https://vuejs
 >A study on updating input based on user feedback on child components
 
 ---
+
+### Modal Component
+
+>A button that show a [Bulma](http://bulma.io/)'s modal.
+
+---
+
 
 
 #### Made with vue-simple-boilerplate
