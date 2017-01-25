@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Vue</title>
+  <!-- Latest compiled and minified CSS -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css" />
+</head>
+<body>
+
+<section class="section">
+  <div id="root" class="container">
+
+    <tabs>
+      <tab name="Severus" :selected="true">
+        <h1>After all this time?</h1>
+      </tab>
+
+      <tab name="& Morty">
+        <h1>Free Rick!</h1>
+      </tab>
+
+      <tab name="A new hope">
+        <h1>Long time ago in a galaxy far far away</h1>
+      </tab>
+    </tabs>
+
+</section>
+
+  <script>
+
+Vue.component('tabs', {
+  template: `
+  <div>
+  <div class="tabs">
+  <ul>
+    <li v-for="tab in tabs" :class="{ 'is-active': tab.isActive }">
+    <a :href="tab.href" @click="selectTab(tab)">{{tab.name}}</a>
+    </li>
+  </ul>
+</div>
+
+<div class=tab-details>
+  <slot></slot>
+</div>
+</div>
+  `,
+
+  data() {
+    return{tabs: []}
+  },
+  created() {
+    this.tabs = this.$children;
+  },
+
+  methods: {
+    selectTab(selectedTab){
+      this.tabs.forEach(tab => {
+          // made our mutation on the new custom data (see below for explanation)
+          tab.isActive = (tab.name == selectedTab.name)
+      })
+    }
+  },
+});
+
+// here we're gonna use v-show:isActive to show only the body
+// of the tab that has that property true => the selected one
+Vue.component('tab', {
+  template: `
+  <div v-show="isActive"><slot></slot></div>
+  `,
+
+  props: {
+    name: {
+      required: true,
+    },
+    selected: {default: false}
+  },
+
+  // Vue will prevent changing a prop. Therefore to change the selected status
+  // the best practice is set a data value with the same value as prop when component mount
+  // then pass the new value into our methods to manipulate it
+  data() {
+    return {
+      // my cutom data initialized to false
+      isActive: false
+    }
+
+  },
+
+  // let's dynamically set the href link by computing the binded href value.
+  computed: {
+    href() {
+      // here the link can be explicit by setting an id in the parent
+      // and then passing down the property.
+      // I'll just do it dynamically for exercise
+      return '#' + this.name.toLowerCase().replace(/ /g, '-' );
+    }
+  },
+  mounted() {
+    this.isActive = this.selected
+  }
+})
+
+  new Vue({
+    el: '#root',
+
+  })
+
+  </script>
+</body>
+</html>
