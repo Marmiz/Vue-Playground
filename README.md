@@ -25,7 +25,11 @@ a personal study collection of small components made with [Vue.js](https://vuejs
 
 ---
 
+### Class Binding
 
+>A study on dynamic class binding.
+
+---
 
 #### Made with vue-simple-boilerplate
 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Vue</title>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <style type="text/css">
+    .redTitle {
+      color: red
+    }
+
+    .purpleTitle {
+      color:purple
+    }
+
+
+
+  </style>
+
+</head>
+<body>
+  <div class="well" style="margin-top:20vh">
+    <!-- let's create a text input first -->
+    <div id="app">
+
+      <!-- I can define class by binding the value to a class -->
+      <h1 :class="redTitle">I am red!<span :class="purpleTitle">I am not</span></h1>
+
+
+      <!-- now declare a class dynamically upon user interaction -->
+      <!-- bind the class to a boolean value (clicked:true/false) defined in data -->
+      <!-- register the click event to toggle the bt-primary class -->
+
+      <button class="btn" :class="{ 'btn-primary' : clicked}" @click="toggleClass">Toggle me</button>
+    </div>
+
+
+  </div>
+
+  <script>
+
+  new Vue ({
+    el: '#app',
+
+    data: {
+
+      //here I refernce my value to the class defined into style.
+      redTitle: 'redTitle',
+      purpleTitle: 'purpleTitle',
+      clicked: false
+    },
+
+    methods: {
+      toggleClass () {
+        this.clicked = this.clicked ? false : true
+
+      }
+    }
+  })
+
+
+  </script>
+
+</body>
+</html>
