@@ -26,14 +26,47 @@
     <div id="app">
 
       <!-- I can define class by binding the value to a class -->
-      <h1 :class="redTitle">I am red!<span :class="purpleTitle">I am not</span></h1>
+      <h1 :class="redTitle">Class<span :class="purpleTitle">Binding</span></h1>
 
 
       <!-- now declare a class dynamically upon user interaction -->
       <!-- bind the class to a boolean value (clicked:true/false) defined in data -->
       <!-- register the click event to toggle the bt-primary class -->
 
+      <p>bind the class to a boolean value (clicked:true/false) defined in data amd register the click event to toggle between class</p>
       <button class="btn" :class="{ 'btn-primary' : clicked}" @click="toggleClass">Toggle me</button>
+
+      <br>
+      <br>
+
+      <!-- for checkboxes I can filter into the checked array and assign the class if the value is present -->
+      <p>for checkboxes I can filter into the checked array and assign the class if the value is present</p>
+      <label for="jack" class="btn btn-primary" :class="{'btn-success': checkedNames.indexOf('Jack') > -1}" >
+      <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+      Jack</label>
+
+      <label for="john" class="btn btn-primary" :class="{'btn-success': checkedNames.indexOf('John') > -1}">
+      <input type="checkbox" id="john" value="John" v-model="checkedNames">
+      John</label>
+
+      <label for="mike" class="btn btn-primary" :class="{'btn-success' : checkedNames.indexOf('Mike') > -1}">
+      <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+      Mike</label>
+      <br>
+      <span>Checked names: {{ checkedNames }}</span>
+
+      <br>
+      <br>
+
+      <!-- for radio I can simply check to see if the picked value is the same as the imput value -->
+      <p>for radio I can simply check to see if the picked value is the same as the imput value</p>
+      <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one" :class="{'redTitle' : picked == 'One'}">One</label>
+      <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two" :class="{'purpleTitle' : picked == 'Two'}">Two</label>
+      <br>
+<span>Picked: {{ picked }}</span>
+
     </div>
 
 
@@ -49,15 +82,20 @@
       //here I refernce my value to the class defined into style.
       redTitle: 'redTitle',
       purpleTitle: 'purpleTitle',
-      clicked: false
+      clicked: false,
+      checkedNames: [],
+      picked: '',
+      isSelected: false,
     },
 
     methods: {
       toggleClass () {
         this.clicked = this.clicked ? false : true
-
-      }
-    }
+      },
+    //   toggleColor () {
+    //     this.isSelected = !this.isSelected
+    //   }
+     }
   })
 
 
